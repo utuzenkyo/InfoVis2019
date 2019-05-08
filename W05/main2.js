@@ -65,7 +65,7 @@ function main()
     material.vertexColors = THREE.FaceColors;
     for (var i=0; i<nfaces ; i++)
         {
-            geometry.faces[i].color = new THREE.Color(i,3,6);
+            geometry.faces[i].color = new THREE.Color(1,2,i);
         }
     
     geometry.computeFaceNormals();
@@ -77,14 +77,42 @@ function main()
     light.position.set(5,5,5);
     scene.add(light);
     
-
+    document.addEventListener( 'mousedown', mouse_down_event );
+    function mouse_down_event( event )
+    {
+        var x_win = event.clientX;
+        var y_win = event.clientY;
+        
+        var vx = renderer.domElement.offsetLeft;
+        var vy = renderer.domElement.offsetTop;
+        var vw = renderer.domElement.width;
+        var vh = renderer.domElement.height;
+        
+        var x_NDC = 2 * ( x_win - vx ) / vw - 1;
+        var y_NDC = -( 2 * ( y_win - vy ) / vh - 1 );
+        
+        var p_NDC = new THREE.Vector3( x_NDC, y_NDC, 1);
+        var p_wld = p_NDC.unproject( camera );
+        
+        var origin = camera.position;
+        var direction = p_wld.sub( camera.position ).normalize();
+        
+        var raycaster = new THREE.Raycaster( origin, direction );
+        var intersects = raycaster.intersectObject( cube );
+        if ( intersects.length > 0 )
+            {
+                intersects[0].face.color.setRGB( 0.1, 0.4, 0.6 );
+                intersects[0].object.geometry.colorsNeedUpdate = true;
+            }
+    }
+    
     loop();
 
     function loop()
     {
         requestAnimationFrame( loop );
-        cube.rotation.x += 0.003;
-        cube.rotation.y += 0.003;
+        cube.rotation.x += 0.005;
+        cube.rotation.y += 0.005;
         renderer.render( scene, camera );
     }
 }
