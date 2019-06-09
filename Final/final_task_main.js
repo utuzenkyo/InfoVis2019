@@ -52,7 +52,7 @@ function main()
 	var isoCtrl = gui.add(guiObj, 'isovalue',0,255);
 	var reflecCtrl = gui.add(guiObj, 'reflection',{Lambertian:0, Phong:1, Blinn:2});
 	var interpoCtrl = gui.add(guiObj, 'interpolation');
-	var cmapCtrl = gui.add(guiObj, 'colorMap',{Rainbow:0, Singular:1});
+	var cmapCtrl = gui.add(guiObj, 'colorMap',{Rainbow:0, Single:1});
 	
 	// draw color map
 	function getColorbar(cmap){
