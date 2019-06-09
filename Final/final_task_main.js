@@ -5,7 +5,7 @@ function main()
 	var isovalue = 128;
 	var reflectionFlag = 0;
 	var interpolationFlag = false;
-	var cmapFlag = false;
+	var cmapFlag = 0;
 
     screen.init( volume, {
         width: window.innerWidth,
