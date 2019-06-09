@@ -50,7 +50,7 @@ function main()
 	var gui = new dat.GUI();
 	var guiObj = new guiCtrl();
 	var isoCtrl = gui.add(guiObj, 'isovalue',0,255);
-	var reflecCtrl = gui.add(guiObj, 'reflection',{Lambertian:0, Phong:1, Blinn:2});
+	var reflecCtrl = gui.add(guiObj, 'reflection',{Phong:0, Blinn:1, Lambertian:2});
 	var interpoCtrl = gui.add(guiObj, 'interpolation');
 	var cmapCtrl = gui.add(guiObj, 'colorMap',{Rainbow:0, Single:1});
 	
